@@ -1,5 +1,5 @@
 package ScalaCatFriendlyPlants.Parsers
 
-trait Parser {
-  def parse(): ParserOutput;
+trait Parser[T <: SafePlant] {
+  def parse(): List[T];
 }

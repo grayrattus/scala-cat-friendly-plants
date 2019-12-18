@@ -1,6 +1,6 @@
 package samples
 
-import ScalaCatFriendlyPlants.Parsers.SafePlant
+import ScalaCatFriendlyPlants.Parsers.{Plant, SafePlant}
 import net.ruippeixotog.scalascraper.browser.JsoupBrowser
 import org.junit.Assert._
 import org.junit._
@@ -23,7 +23,7 @@ class IkeaParserTest {
               .replace(".-", "")
               .toFloat
 
-            new SafePlant("", "", 0)
+            new Plant(name, "", price)
         })
         parsedItems.foreach(println)
     }

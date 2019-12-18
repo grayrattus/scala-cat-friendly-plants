@@ -1,5 +1,7 @@
 package ScalaCatFriendlyPlants.Parsers
 
-class IkeaParser extends Parser {
-  override def parse(): ParserOutput = ???
+class IkeaParser extends Parser[Plant] {
+  override def parse(): List[Plant] = {
+    ???
+  }
 }
