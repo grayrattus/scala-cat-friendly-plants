@@ -4,29 +4,26 @@ import ScalaCatFriendlyPlants.Parsers.{Plant, SafePlant}
 import net.ruippeixotog.scalascraper.browser.JsoupBrowser
 import org.junit.Assert._
 import org.junit._
+import ScalaCatFriendlyPlants.Parsers.IkeaParser
 import net.ruippeixotog.scalascraper.model._
 import net.ruippeixotog.scalascraper.dsl.DSL._
 import net.ruippeixotog.scalascraper.dsl.DSL.Extract._
 import net.ruippeixotog.scalascraper.dsl.DSL.Parse._
 
+import scala.collection.mutable
+
 @Test
 class IkeaParserTest {
     @Test
     def TestLib(): Unit = {
-        val browser = JsoupBrowser()
-        val doc2 = browser.get("https://www.ikea.com/pl/pl/cat/rosliny-doniczkowe-i-sukulenty-10779/?page=5")
-        val items = doc2 >> elementList(".product-compact")
-        var parsedItems = items.map(e => {
-            var name = e >> element(".product-compact__name") >> allText
-            var price = (e >> element(".product-compact__price__value") >> allText)
-              .replace(',','.')
-              .replace(".-", "")
-              .toFloat
+        var ikeaParser = new IkeaParser()
+        var parsedItems = ikeaParser.parse()
 
-            new Plant(name, "", price)
-        })
-        parsedItems.foreach(println)
+        assert(parsedItems.length > 0);
+        assert(parsedItems.filter(elem => elem.name.equals("DYPSIS LUTESCENS")).length > 0);
+        assert(parsedItems.filter(elem => elem.name.equals("CYCLAMEN")).length > 0);
     }
+
 
 }
 
